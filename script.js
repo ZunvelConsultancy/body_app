@@ -54,6 +54,7 @@ function enableCam() {
     })
         .then(stream => {
             video.srcObject = stream;
+            video.play(); // Asegurar que el video se reproduzca
             video.addEventListener("loadeddata", () => {
                 loadingElement.style.display = 'none';
                 canvasElement.width = video.videoWidth;
