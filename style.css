@@ -18,8 +18,9 @@ video {
     left: 0;
     width: 100%;
     height: 100%;
-    transform: scaleX(-1);
     object-fit: cover;
+    opacity: 0; /* Hacer el video transparente */
+    z-index: -1; /* Enviar el video detrás del canvas */
 }
 
 canvas {
