@@ -47,6 +47,7 @@ async function setup() {
 function enableCam() {
     navigator.mediaDevices.getUserMedia({ 
         video: { 
+            facingMode: { exact: "environment" }, // Usar la cámara trasera
             width: { ideal: 1280 }, 
             height: { ideal: 720 } 
         } 
@@ -55,6 +56,7 @@ function enableCam() {
             video.srcObject = stream;
             video.addEventListener("loadeddata", () => {
                 loadingElement.style.display = 'none';
+                video.style.display = 'none'; // Ocultar el elemento de video
                 canvasElement.width = video.videoWidth;
                 canvasElement.height = video.videoHeight;
                 window.addEventListener('resize', onResize);
@@ -75,9 +77,8 @@ async function predictWebcam() {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    // Espejar el contexto de dibujo
-    canvasCtx.translate(canvasElement.width, 0);
-    canvasCtx.scale(-1, 1);
+    // Dibujar el fotograma del video en el canvas
+    canvasCtx.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
 
     if (results.landmarks) {
         for (const landmarks of results.landmarks) {
