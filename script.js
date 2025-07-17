@@ -56,7 +56,6 @@ function enableCam() {
             video.srcObject = stream;
             video.addEventListener("loadeddata", () => {
                 loadingElement.style.display = 'none';
-                video.style.display = 'none'; // Ocultar el elemento de video
                 canvasElement.width = video.videoWidth;
                 canvasElement.height = video.videoHeight;
                 window.addEventListener('resize', onResize);
